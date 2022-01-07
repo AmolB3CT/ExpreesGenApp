@@ -1,18 +1,25 @@
 var mongoose = require("mongoose");
-// const demographcs = require("./demographics");
+const demographics = require("./demographics");
 var userregistrations =  new mongoose.Schema({
-    firstName: {type: String,required : true},
-    lastName: {type: String,required : true},
-    email: { type: String, required: true, unique: true, validate: {
+    firstname: {type: String},
+    lastname: {type: String},
+    email: { type: String, unique: true, validate: {
         message: 'Please provide a valid email id',
         validator: (value) => true
     }},
-    phone: { type: Number, required: true},
-    userName: { type: String, required: true },
-    role: { type: String, required: true },
-    userpass: { type: String, required: true },
-    // isActive: { type: String, required: true },
-    dob: { type: String, required: true },
+    phone: { type: Number,},
+    username: { type: String, },
+    role: { type: String, },
+    userpass: { type: String, },
+    isActive: { type: String, },
+    dob: { type: String, },
+    regDate: { type: String,},
+    demographics: {type: demographics},
+    sceduledAppointments: {type: Array},
+    immunization: {type: Array},
+    allergies: {type: Array},
+    currentMedications: {type: Array},
+
 });
 
 module.exports = mongoose.model('userregistrations', userregistrations);
