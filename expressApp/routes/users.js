@@ -34,4 +34,37 @@ router.post("/registration", async (req, res) => {
   }
 })
 
+router.put("/registration/:username", async (req, res) => {
+  try {
+    const username = {username: req.params.username};
+    console.log(username)
+    const users = await userregistrations.updateOne(username, {
+        $set: {
+          demographics:
+          {
+              height: req.body.height,
+              weight: req.body.weight,
+              age: req.body.age,
+              medHistory: req.body.medHistory,
+              surgeries: req.body.surgeries,
+              familyMedHistory: req.body.familyMedHistory,
+              provider: req.body.provider,
+              gender: req.body.gender,
+              phoneNo: req.body.phoneNo,
+              adderess: req.body.adderess,
+              employment: req.body.employment,
+              education: req.body.education,
+              ethnicity: req.body.ethnicity,
+              pluseRate: req.body.weight,
+              bloodPressure: req.body.bloodPressure
+          }
+        },
+      }); 
+      return res.json({ success: true, msg: "DEmographics updated successfully", data: users });
+
+  } catch (error) {
+    return res.json({ success: false, msg: error.message, data: null });
+  }
+})
+
 module.exports = router;

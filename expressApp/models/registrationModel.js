@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-const demographics = require("./demographics");
 var userregistrations =  new mongoose.Schema({
     firstname: {type: String},
     lastname: {type: String},
@@ -14,7 +13,23 @@ var userregistrations =  new mongoose.Schema({
     isActive: { type: String, },
     dob: { type: String, },
     regDate: { type: String,},
-    demographics: {type: demographics},
+    demographics: {
+        height: {type:String},
+        weight: {type:String},
+        age: {type:Number},
+        bloodPressure: {type:String},
+        pluseRate: {type:String},
+        ethnicity: {type:String},
+        education: {type:String},
+        employment: {type:String},
+        address: {type:String},
+        phoneNo: {type:Number},
+        medHistory: {type:String},
+        surgeries: {type:String},
+        familyMedHistory: {type:String},
+        provider: {type:String},
+        gender: {type:String},
+    },
     sceduledAppointments: {type: Array},
     immunization: {type: Array},
     allergies: {type: Array},
