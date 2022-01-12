@@ -58,13 +58,15 @@ router.put("/registration/:username", async (req, res) => {
               pluseRate: req.body.weight,
               bloodPressure: req.body.bloodPressure
           }
-        },
+        }
       }); 
       return res.json({ success: true, msg: "DEmographics updated successfully", data: users });
 
   } catch (error) {
     return res.json({ success: false, msg: error.message, data: null });
   }
-})
+});
+
+
 
 module.exports = router;

@@ -33,7 +33,7 @@ var userregistrations =  new mongoose.Schema({
     sceduledAppointments: {type: Array},
     immunization: {type: Array},
     allergies: {type: Array},
-    currentMedications: {type: Array},
+    currentMedications: [],
 
 });
 
