@@ -67,6 +67,45 @@ router.put("/registration/:username", async (req, res) => {
   }
 });
 
+router.put("/currentMedications/:username", async (req, res) => {
+  try {
+    const username = {username: req.params.username};
+    console.log(username)
+    const users = await userregistrations.updateOne(username, {
+      $set: { currentMedications: req.body } }
+      ); 
+      return res.json({ success: true, msg: "Medications updated successfully", data: users });
 
+  } catch (error) {
+    return res.json({ success: false, msg: error.message, data: null });
+  }
+});
 
+router.put("/allergies/:username", async (req, res) => {
+  try {
+    const username = {username: req.params.username};
+    console.log(username)
+    const users = await userregistrations.updateOne(username, {
+      $set: { allergies: req.body } }
+      ); 
+      return res.json({ success: true, msg: "Allergies updated successfully", data: users });
+
+  } catch (error) {
+    return res.json({ success: false, msg: error.message, data: null });
+  }
+});
+
+router.put("/immunization/:username", async (req, res) => {
+  try {
+    const username = {username: req.params.username};
+    console.log(username)
+    const users = await userregistrations.updateOne(username, {
+      $set: { immunization: req.body } }
+      ); 
+      return res.json({ success: true, msg: "Immunization updated successfully", data: users });
+
+  } catch (error) {
+    return res.json({ success: false, msg: error.message, data: null });
+  }
+});
 module.exports = router;

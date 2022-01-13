@@ -30,10 +30,14 @@ var userregistrations =  new mongoose.Schema({
         provider: {type:String},
         gender: {type:String},
     },
-    sceduledAppointments: {type: Array},
-    immunization: {type: Array},
-    allergies: {type: Array},
-    currentMedications: [],
+        type: {type:String},
+        desc: {type:String},
+        location: {type:String},
+        overview: {type:String},
+        sceduledAppointments: {type: Array},
+        immunization: {type: Array},
+        allergies: {type: Array},
+        currentMedications: [],
 
 });
 
