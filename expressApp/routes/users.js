@@ -109,3 +109,19 @@ router.put("/immunization/:username", async (req, res) => {
   }
 });
 module.exports = router;
+
+router.put("/updateFlag/:username", async (req, res) => {
+  try {
+    const username = {username: req.params.username};
+    console.log(username)
+    const users = await userregistrations.updateOne(username, {
+        $set: {
+          isActive: req.body.isActive
+        }
+      }); 
+      return res.json({ success: true, msg: "Flag updated successfully", data: users });
+
+  } catch (error) {
+    return res.json({ success: false, msg: error.message, data: null });
+  }
+});
