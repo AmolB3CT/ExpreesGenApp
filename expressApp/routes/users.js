@@ -108,7 +108,6 @@ router.put("/immunization/:username", async (req, res) => {
     return res.json({ success: false, msg: error.message, data: null });
   }
 });
-module.exports = router;
 
 router.put("/updateFlag/:username", async (req, res) => {
   try {
@@ -125,3 +124,6 @@ router.put("/updateFlag/:username", async (req, res) => {
     return res.json({ success: false, msg: error.message, data: null });
   }
 });
+
+module.exports = router;
+
