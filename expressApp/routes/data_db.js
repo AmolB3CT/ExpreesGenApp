@@ -20,6 +20,24 @@ router.get("/allergies", async (req, res) => {
     }
   })
 
+router.get("/proCodes", async (req, res) => {
+    try {
+      const procedureCodes = await req.db.collection('ProcedureCodes').find({}).toArray();
+        return res.json({success: true, msg: 'Medicine list', data: procedureCodes});
+    } catch (error) {
+        return res.json({ success: false, msg: error.message, data: null });
+    }
+  });
+
+router.get("/diagCodes", async (req, res) => {
+    try {
+      const DiagnosisCodes = await req.db.collection('DiagnosisCodes').find({}).toArray();
+        return res.json({success: true, msg: 'Medicine list', data: DiagnosisCodes});
+    } catch (error) {
+        return res.json({ success: false, msg: error.message, data: null });
+    }
+  });
+
 router.get("/physicians", async (req, res) => {
     try {
       const physicians = await req.db.collection('Physicians').find({}).toArray();
@@ -73,6 +91,7 @@ router.post("/physicians", async (req, res) => {
         finalData.allergies = patientData.allergies;
         finalData.currentMedications = patientData.currentMedications;
         finalData.username=patientData.username;
+        finalData.visitDetails= {}
 
         finalData.email=patientData.email;
 
@@ -108,6 +127,18 @@ router.post("/physicians", async (req, res) => {
     } catch (error) {
         return res.json({ success: false, msg: error.message });
     }
+});
+
+router.put("/visitDetails/:physicianId", async (req, res) => {
+  try {
+      const physicianId = req.params.physicianId;
+
+      const physicianData = await req.db.collection('Physicians').updateOne({ username: physicianId, "patientsDetails": { $elemMatch: { username:req.body.username , schedule_time:req.body.schedule_time }} }, { "$set": { "patientsDetails.$.visitDetails": req.body.visitDetails } });
+      //   const inserted = await physician.Update({username: physicianId},  {$push:{patientsDetails:finalData}});
+      return res.json({ success: true, msg: "Visit Completed", visitDetails: physicianData });
+  } catch (error) {
+      return res.json({ success: false, msg: error.message });
+  }
 });
 
 module.exports = router;
